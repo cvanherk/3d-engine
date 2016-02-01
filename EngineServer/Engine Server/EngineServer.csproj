@@ -7,7 +7,7 @@
     <ProjectGuid>{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Engine_Server</RootNamespace>
+    <RootNamespace>EngineServer</RootNamespace>
     <AssemblyName>Engine Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

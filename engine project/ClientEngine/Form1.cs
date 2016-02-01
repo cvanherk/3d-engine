@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.DirectX;
+using Microsoft.DirectX.Direct3D;
+using Direct3D = Microsoft.DirectX.Direct3D;
 
 namespace ClientEngine
 {
@@ -15,6 +18,7 @@ namespace ClientEngine
         public Form1()
         {
             InitializeComponent();
+            Device device = null;
         }
     }
 }

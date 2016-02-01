@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{FA8FAF05-3965-4AC8-92E4-35E647DCF42B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine Server", "..\EngineServer\Engine Server\Engine Server.csproj", "{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientEngine", "ClientEngine\ClientEngine.csproj", "{017BC7FF-10CD-4C08-86C3-11814FCB4429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{FA8FAF05-3965-4AC8-92E4-35E647DCF42B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA8FAF05-3965-4AC8-92E4-35E647DCF42B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA8FAF05-3965-4AC8-92E4-35E647DCF42B}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDDBCE0F-EBD7-41B7-A062-1B4A49ADB442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{017BC7FF-10CD-4C08-86C3-11814FCB4429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{017BC7FF-10CD-4C08-86C3-11814FCB4429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{017BC7FF-10CD-4C08-86C3-11814FCB4429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{017BC7FF-10CD-4C08-86C3-11814FCB4429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

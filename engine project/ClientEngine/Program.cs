@@ -8,15 +8,26 @@ namespace ClientEngine
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            using (var mainForm = new Main())
+            {
+                if (!mainForm.InitializeGraphics()) // Initialize Direct3D
+                {
+                    MessageBox.Show(
+                        "Could not initialize Direct3D..");
+                    return;
+                }
+                mainForm.Show();
+
+                // While the form is still valid, render and process messages
+                while (mainForm.Created)
+                {
+                    mainForm.Render();
+                    Application.DoEvents();
+                }
+            }
         }
     }
 }

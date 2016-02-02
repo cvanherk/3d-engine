@@ -1,5 +1,6 @@
 ﻿using ClientEngine.Objecten.Variables;
 using SharpGL;
+using System;
 using System.Drawing;
 
 namespace ClientEngine.Objecten
@@ -9,6 +10,7 @@ namespace ClientEngine.Objecten
         public Vector3 Position = Vector3.Zero;
         public Rotation Rotation = Rotation.Zero;
         public Color Color = Color.Red;
+        public Mesh Mesh;
 
         public bool IsActive = true;
         public bool IsDestroyed = false;
@@ -38,45 +40,21 @@ namespace ClientEngine.Objecten
             
         }
 
-        public void Draw(OpenGL gl)
+        public void Draw(OpenGL renderer)
         {
             if (!IsActive)
                 return;
 
-            gl.Translate(Position.X, Position.Y, Position.Z);				// Move Right And Into The Screen
-            gl.Rotate(Rotation.Angle, Rotation.X, Rotation.Y, Rotation.Z);			// Rotate The Cube On X, Y & Z
-            gl.Begin(OpenGL.GL_QUADS);					// Start Drawing The Cube
+            renderer.Translate(Position.X, Position.Y, Position.Z);
+            renderer.Rotate(Rotation.Angle, Rotation.X, Rotation.Y, Rotation.Z);
+            renderer.Begin(OpenGL.GL_QUADS);
+            
+            renderer.Color(Color.R, Color.G, Color.B);
 
-            gl.Color(Color.R, Color.G, Color.B);			// Set The Color To Green
-            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Top)
-            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Top)
-            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Bottom Left Of The Quad (Top)
-            gl.Vertex(1.0f, 1.0f, 1.0f);			// Bottom Right Of The Quad (Top)
-            
-            gl.Vertex(1.0f, -1.0f, 1.0f);			// Top Right Of The Quad (Bottom)
-            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Top Left Of The Quad (Bottom)
-            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Bottom)
-            gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Bottom)
-            
-            gl.Vertex(1.0f, 1.0f, 1.0f);			// Top Right Of The Quad (Front)
-            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Top Left Of The Quad (Front)
-            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Front)
-            gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Right Of The Quad (Front)
-            
-            gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Back)
-            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Back)
-            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Back)
-            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Back)
-            
-            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Top Right Of The Quad (Left)
-            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Left)
-            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Left)
-            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Bottom Right Of The Quad (Left)
-            
-            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Right)
-            gl.Vertex(1.0f, 1.0f, 1.0f);			// Top Left Of The Quad (Right)
-            gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Right)
-            gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Right)
+            foreach (var vertex in Mesh.vertices)
+            {
+                renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
+            }
         }
     }
 }

@@ -1,14 +1,10 @@
-﻿using ClientEngine.Objecten;
+﻿using ClientEngine.Models;
+using ClientEngine.Objecten;
+using ClientEngine.Objecten.Variables;
 using ClientEngine.Test;
 using SharpGL;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientEngine
@@ -20,8 +16,26 @@ namespace ClientEngine
         public Game()
         {
             InitializeComponent();
-            _gameObject.Add(new TestGameObject(-5,2));
-            _gameObject.Add(new TestGameObject(-5,-1));
+            var fbx = new ObjectImporter();
+            var mesh = fbx.createMeshStruct(@"D:\Robin\Desktop\Cube\cube.obj");
+            var gameObject = new GameObject
+            {
+                Position = new Vector3
+                {
+                    X = -2,
+                    Y = -1,
+                    Z = -7.5f,
+                },
+                Rotation = new Rotation
+                {
+                    Angle = 0.5f,
+                    X = 0f,
+                    Y = 1f,
+                    Z = 1f,
+                },
+                Mesh = mesh,
+            };
+            _gameObject.Add(gameObject);
         }
         
         private void openGlControl_OpenGLDraw(object sender, RenderEventArgs args)
@@ -44,6 +58,7 @@ namespace ClientEngine
                 renderer.End();
                 renderer.Flush();
             }
+            
         }
 
         private void DestroyGameObject(GameObject gameObject)

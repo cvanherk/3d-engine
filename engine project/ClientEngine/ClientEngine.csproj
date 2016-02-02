@@ -64,8 +64,11 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ObjectImporter.cs" />
     <Compile Include="Objecten\GameObject.cs" />
+    <Compile Include="Objecten\Variables\Mesh.cs" />
     <Compile Include="Objecten\Variables\Rotation.cs" />
+    <Compile Include="Objecten\Variables\Vector2.cs" />
     <Compile Include="Objecten\Variables\Vector3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

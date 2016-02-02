@@ -1,6 +1,6 @@
 ﻿namespace ClientEngine.Objecten.Variables
 {
-    class Vector3
+    public class Vector3
     {
         public float X { get; set; }
         public float Y { get; set; }

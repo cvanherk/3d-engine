@@ -1,6 +1,6 @@
 ﻿namespace ClientEngine
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
@@ -44,20 +44,21 @@
             this.OpenGlControl.Size = new System.Drawing.Size(792, 467);
             this.OpenGlControl.TabIndex = 0;
             this.OpenGlControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGlControl_OpenGLDraw);
-            this.OpenGlControl.KeyDown += OpenGlControl_KeyDown;
             // 
-            // Form1
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 467);
             this.Controls.Add(this.OpenGlControl);
-            this.Name = "Form1";
-            this.Text = "Simple Drawing Sample";
+            this.Name = "Game";
+            this.Text = "Game";
+            this.Load += new System.EventHandler(this.Game_Load);
             ((System.ComponentModel.ISupportInitialize)(this.OpenGlControl)).EndInit();
             this.ResumeLayout(false);
 
         }
+
         #endregion
 
         private SharpGL.OpenGLControl OpenGlControl;

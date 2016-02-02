@@ -25,17 +25,11 @@ namespace ClientEngine
             {
                 Position = new Vector3
                 {
-                    X = -2,
-                    Y = -1,
+                    X = 0,
+                    Y = 0,
                     Z = -7.5f,
                 },
-                Rotation = new Rotation
-                {
-                    Angle = 0.5f,
-                    X = 0f,
-                    Y = 1f,
-                    Z = 1f,
-                },
+                
                 Mesh = mesh,
             };
             _gameObject.Add(gameObject);

@@ -1,13 +1,14 @@
 ﻿using ClientEngine.Objects.Variables;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace ClientEngine.Models
 {
     public class ObjectImporter
     {
-        public Mesh createMeshStruct(string filename)
+        public Mesh CreateMeshStruct(string filename)
         {
             int triangles = 0;
             int vertices = 0;
@@ -123,25 +124,25 @@ namespace ClientEngine.Models
                             case "mtllib":
                                 break;
                             case "v":
-                                mesh.vertices[v] = new Vector3(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2]),
-                                                         System.Convert.ToSingle(brokenString[3]));
+                                mesh.vertices[v] = new Vector3(System.Convert.ToSingle(brokenString[1], CultureInfo.InvariantCulture), System.Convert.ToSingle(brokenString[2], CultureInfo.InvariantCulture),
+                                                         System.Convert.ToSingle(brokenString[3], CultureInfo.InvariantCulture));
                                 v++;
                                 break;
                             case "vt":
-                                mesh.uv[vt] = new Vector2(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2]));
+                                mesh.uv[vt] = new Vector2(System.Convert.ToSingle(brokenString[1], CultureInfo.InvariantCulture), System.Convert.ToSingle(brokenString[2], CultureInfo.InvariantCulture));
                                 vt++;
                                 break;
                             case "vt1":
-                                mesh.uv[vt1] = new Vector2(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2]));
+                                mesh.uv[vt1] = new Vector2(System.Convert.ToSingle(brokenString[1], CultureInfo.InvariantCulture), System.Convert.ToSingle(brokenString[2], CultureInfo.InvariantCulture));
                                 vt1++;
                                 break;
                             case "vt2":
-                                mesh.uv[vt2] = new Vector2(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2]));
+                                mesh.uv[vt2] = new Vector2(System.Convert.ToSingle(brokenString[1], CultureInfo.InvariantCulture), System.Convert.ToSingle(brokenString[2], CultureInfo.InvariantCulture));
                                 vt2++;
                                 break;
                             case "vn":
-                                mesh.normals[vn] = new Vector3(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2]),
-                                                        System.Convert.ToSingle(brokenString[3]));
+                                mesh.normals[vn] = new Vector3(System.Convert.ToSingle(brokenString[1]), System.Convert.ToSingle(brokenString[2], CultureInfo.InvariantCulture),
+                                                        System.Convert.ToSingle(brokenString[3], CultureInfo.InvariantCulture));
                                 vn++;
                                 break;
                             case "vc":
@@ -154,14 +155,14 @@ namespace ClientEngine.Models
                                 {
                                     Vector3 temp = new Vector3();
                                     brokenBrokenString = brokenString[j].Split(splitIdentifier2, 3);    //Separate the face into individual components (vert, uv, normal)
-                                    temp.X = System.Convert.ToInt32(brokenBrokenString[0]);
+                                    temp.X = System.Convert.ToInt32(brokenBrokenString[0], CultureInfo.InvariantCulture);
                                     if (brokenBrokenString.Length > 1)                                  //Some .obj files skip UV and normal
                                     {
                                         if (brokenBrokenString[1] != "")                                    //Some .obj files skip the uv and not the normal
                                         {
-                                            temp.Y = Convert.ToInt32(brokenBrokenString[1]);
+                                            temp.Y = Convert.ToInt32(brokenBrokenString[1], CultureInfo.InvariantCulture);
                                         }
-                                        temp.Z = System.Convert.ToInt32(brokenBrokenString[2]);
+                                        temp.Z = System.Convert.ToInt32(brokenBrokenString[2], CultureInfo.InvariantCulture);
                                     }
                                     j++;
 

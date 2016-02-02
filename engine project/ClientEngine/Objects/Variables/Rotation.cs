@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientEngine.Objecten.Variables
+namespace ClientEngine.Objects.Variables
 {
-    class Rotation
+    public class Rotation
     {
         public float Angle { get; set; }
         public float X { get; set; }

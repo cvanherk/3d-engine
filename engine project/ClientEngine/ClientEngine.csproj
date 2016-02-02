@@ -67,11 +67,14 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objecten\GameObject.cs" />
-    <Compile Include="Objecten\Variables\Rotation.cs" />
-    <Compile Include="Objecten\Variables\Vector3.cs" />
+    <Compile Include="Objects\Camera.cs" />
+    <Compile Include="Objects\GameObject.cs" />
+    <Compile Include="Objects\IGameObject.cs" />
+    <Compile Include="Objects\Variables\Rotation.cs" />
+    <Compile Include="Objects\Variables\Vector3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\TestGameObject2.cs" />
     <Compile Include="Test\TestGameObject.cs" />
     <EmbeddedResource Include="Game.resx">
       <DependentUpon>Game.cs</DependentUpon>

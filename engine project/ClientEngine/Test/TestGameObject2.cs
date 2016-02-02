@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace ClientEngine.Test
 {
-    class TestGameObject : GameObject
+    class TestGameObject2 : GameObject
     {
-        public TestGameObject(float x, float y, float z)
+        public TestGameObject2(float z, float x)
         {
-            Position.X = x;
-            Position.Y = y;
             Position.Z = z;
-          
+            Position.X = x;
         }
     }
 }

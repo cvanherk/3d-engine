@@ -52,13 +52,11 @@
             this.ClientSize = new System.Drawing.Size(792, 467);
             this.Controls.Add(this.OpenGlControl);
             this.Name = "Game";
-            this.Text = "Game";
-            this.Load += new System.EventHandler(this.Game_Load);
+            this.Text = "Simple Drawing Sample";
             ((System.ComponentModel.ISupportInitialize)(this.OpenGlControl)).EndInit();
             this.ResumeLayout(false);
 
         }
-
         #endregion
 
         private SharpGL.OpenGLControl OpenGlControl;

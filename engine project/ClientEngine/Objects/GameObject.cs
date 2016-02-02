@@ -1,17 +1,57 @@
-﻿using ClientEngine.Objecten.Variables;
+﻿using ClientEngine.Objects.Variables;
 using SharpGL;
 using System.Drawing;
+using System;
 
-namespace ClientEngine.Objecten
+namespace ClientEngine.Objects
 {
-    class GameObject
+    class GameObject : IGameObject
     {
-        public Vector3 Position = Vector3.Zero;
-        public Rotation Rotation = Rotation.Zero;
+        private Vector3 _position = Vector3.Zero;
+        private Rotation _rotation = Rotation.Zero;
+
+        public Vector3 Position
+        {
+            get
+            {
+                return _position;
+            }
+
+            set
+            {
+                _position = value;
+            }
+        }
+
+        public Rotation Rotation
+        {
+            get
+            {
+                return _rotation;
+            }
+
+            set
+            {
+                _rotation = value;
+            }
+        }
+        private bool _isDestroyed;
+        public bool IsDestroyed
+        {
+            get
+            {
+                return _isDestroyed;
+            }
+
+            set
+            {
+                _isDestroyed = value;
+            }
+        }
+
         public Color Color = Color.Red;
 
         public bool IsActive = true;
-        public bool IsDestroyed = false;
 
         public GameObject()
         {
@@ -35,7 +75,7 @@ namespace ClientEngine.Objecten
 
         public virtual void OnDestroy()
         {
-            
+
         }
 
         public void Draw(OpenGL gl)
@@ -43,8 +83,11 @@ namespace ClientEngine.Objecten
             if (!IsActive)
                 return;
 
-            gl.Translate(Position.X, Position.Y, Position.Z);				// Move Right And Into The Screen
-            gl.Rotate(Rotation.Angle, Rotation.X, Rotation.Y, Rotation.Z);			// Rotate The Cube On X, Y & Z
+            gl.Translate(_position.X, _position.Y, _position.Z);				// Move Right And Into The Screen
+            gl.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);          // Rotate The Cube On X, Y & Z
+
+            Game.Camera.Draw(gl);
+
             gl.Begin(OpenGL.GL_QUADS);					// Start Drawing The Cube
 
             gl.Color(Color.R, Color.G, Color.B);			// Set The Color To Green

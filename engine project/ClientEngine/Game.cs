@@ -1,9 +1,7 @@
 ﻿using ClientEngine.Models;
 using ClientEngine.Objects;
 using ClientEngine.Objects.Variables;
-using ClientEngine.Test;
 using SharpGL;
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -11,13 +9,18 @@ namespace ClientEngine
 {
     partial class Game : Form
     {
-        private static List<IGameObject> _gameObject = new List<IGameObject>();
-        public static IGameObject Camera = new Camera();
+        private List<IGameObject> _gameObject = new List<IGameObject>();
+        public IGameObject Camera = new Camera();
+
         public Game()
         {
             InitializeComponent();
-            var fbx = new ObjectImporter();
-            var mesh = fbx.createMeshStruct(@"D:\Robin\Desktop\Cube\cube.obj");
+
+            //obj loader laad de vertixe en faces in
+            var objLoader = new ObjectImporter();
+            var mesh = objLoader.createMeshStruct(@"D:\Robin\Desktop\Cube\cube.obj");
+
+            //test gameobject
             var gameObject = new GameObject
             {
                 Position = new Vector3
@@ -36,16 +39,21 @@ namespace ClientEngine
                 Mesh = mesh,
             };
             _gameObject.Add(gameObject);
+
         }
         
-     
-        
-        private void openGlControl_OpenGLDraw(object sender, RenderEventArgs args)
+        /// <summary>
+        /// Standaard game update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void GameFrame_Renderer(object sender, RenderEventArgs args)
         {
-        
-            var renderer = OpenGlControl.OpenGL;
+            //haalt de opengl renderer op en cleart het scherm
+            var renderer = GameFrame.OpenGL;
             renderer.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-
+            
+            //loopt door de game objecten heen en drawt deze
             for (int i = 0; i < _gameObject.Count; i++)
             {
                 var gameObject = _gameObject[i];
@@ -57,22 +65,21 @@ namespace ClientEngine
                 }
                 renderer.LoadIdentity();
                 gameObject.Update();
+                Camera.Draw(renderer);
                 gameObject.Draw(renderer);
-              
                 renderer.End();
                 renderer.Flush();
             }
-            
         }
 
+        /// <summary>
+        /// Als Game object ge destroyed is verwijder deze en roep on destroy aan
+        /// </summary>
+        /// <param name="gameObject"></param>
         private void DestroyGameObject(IGameObject gameObject)
         {
             gameObject.OnDestroy();
             _gameObject.Remove(gameObject);
-        }
-        private void Game_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

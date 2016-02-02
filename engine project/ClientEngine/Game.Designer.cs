@@ -27,39 +27,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.OpenGlControl = new SharpGL.OpenGLControl();
-            ((System.ComponentModel.ISupportInitialize)(this.OpenGlControl)).BeginInit();
+            this.GameFrame = new SharpGL.OpenGLControl();
+            ((System.ComponentModel.ISupportInitialize)(this.GameFrame)).BeginInit();
             this.SuspendLayout();
             // 
-            // OpenGlControl
+            // GameFrame
             // 
-            this.OpenGlControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OpenGlControl.DrawFPS = false;
-            this.OpenGlControl.FrameRate = 28;
-            this.OpenGlControl.Location = new System.Drawing.Point(0, 0);
-            this.OpenGlControl.Name = "OpenGlControl";
-            this.OpenGlControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
-            this.OpenGlControl.RenderContextType = SharpGL.RenderContextType.FBO;
-            this.OpenGlControl.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.OpenGlControl.Size = new System.Drawing.Size(792, 467);
-            this.OpenGlControl.TabIndex = 0;
-            this.OpenGlControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGlControl_OpenGLDraw);
+            this.GameFrame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GameFrame.DrawFPS = false;
+            this.GameFrame.FrameRate = 28;
+            this.GameFrame.Location = new System.Drawing.Point(0, 0);
+            this.GameFrame.Name = "GameFrame";
+            this.GameFrame.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
+            this.GameFrame.RenderContextType = SharpGL.RenderContextType.FBO;
+            this.GameFrame.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
+            this.GameFrame.Size = new System.Drawing.Size(792, 467);
+            this.GameFrame.TabIndex = 0;
+            this.GameFrame.OpenGLDraw += new SharpGL.RenderEventHandler(this.GameFrame_Renderer);
             // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 467);
-            this.Controls.Add(this.OpenGlControl);
+            this.Controls.Add(this.GameFrame);
             this.Name = "Game";
             this.Text = "Simple Drawing Sample";
-            ((System.ComponentModel.ISupportInitialize)(this.OpenGlControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GameFrame)).EndInit();
             this.ResumeLayout(false);
 
         }
         #endregion
 
-        private SharpGL.OpenGLControl OpenGlControl;
+        private SharpGL.OpenGLControl GameFrame;
     }
 
 }

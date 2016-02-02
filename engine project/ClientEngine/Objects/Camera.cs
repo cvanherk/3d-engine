@@ -65,10 +65,10 @@ namespace ClientEngine.Objects
             
         }
 
-        public void Draw(OpenGL openGl)
+        public void Draw(OpenGL renderer)
         {
-            openGl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
-            openGl.LookAt(_eye.X * Radius, _eye.Y, _eye.Z * Radius, _center.X, _center.Y, _center.Z, _up.X, -1, _up.Z);
+            renderer.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
+            renderer.LookAt(_eye.X * Radius, _eye.Y, _eye.Z * Radius, _center.X, _center.Y, _center.Z, _up.X, -1, _up.Z);
         }
 
         public void OnDestroy()

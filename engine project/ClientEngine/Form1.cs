@@ -1,4 +1,5 @@
 ﻿using SharpGL;
+using SharpGL.SceneGraph.Cameras;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,57 +21,36 @@ namespace ClientEngine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+
         }
 
+        private LookAtCamera Camera = new LookAtCamera();
+
+
+
+        double eyeX = 0, eyeY = 0, eyeZ = 4;
+        double centerX = 0, centerY = 0, centerZ = 0;
+        double upX = 0, upY = 2, upZ = 0;
+
+        double radius = 1f;
 
         private void openGlControl_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
         {
+
+
+
             //  Get the OpenGL object, just to clean up the code.
             OpenGL gl = OpenGlControl.OpenGL;
+
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
             gl.LoadIdentity();                  // Reset The View
 
-            gl.Translate(-1.5f, 0.0f, -6.0f);				// Move Left And Into The Screen
 
-            gl.Rotate(rtri, 0.0f, 1.0f, 0.0f);				// Rotate The Pyramid On It's Y Axis
 
-            gl.Begin(OpenGL.GL_TRIANGLES);					// Start Drawing The Pyramid
-
-            gl.Color(1.0f, 0.0f, 0.0f);			// Red
-            gl.Vertex(0.0f, 1.0f, 0.0f);			// Top Of Triangle (Front)
-            gl.Color(0.0f, 1.0f, 0.0f);			// Green
-            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Left Of Triangle (Front)
-            gl.Color(0.0f, 0.0f, 1.0f);			// Blue
-            gl.Vertex(1.0f, -1.0f, 1.0f);			// Right Of Triangle (Front)
-
-            gl.Color(1.0f, 0.0f, 0.0f);			// Red
-            gl.Vertex(0.0f, 1.0f, 0.0f);			// Top Of Triangle (Right)
-            gl.Color(0.0f, 0.0f, 1.0f);			// Blue
-            gl.Vertex(1.0f, -1.0f, 1.0f);			// Left Of Triangle (Right)
-            gl.Color(0.0f, 1.0f, 0.0f);			// Green
-            gl.Vertex(1.0f, -1.0f, -1.0f);			// Right Of Triangle (Right)
-
-            gl.Color(1.0f, 0.0f, 0.0f);			// Red
-            gl.Vertex(0.0f, 1.0f, 0.0f);			// Top Of Triangle (Back)
-            gl.Color(0.0f, 1.0f, 0.0f);			// Green
-            gl.Vertex(1.0f, -1.0f, -1.0f);			// Left Of Triangle (Back)
-            gl.Color(0.0f, 0.0f, 1.0f);			// Blue
-            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Right Of Triangle (Back)
-
-            gl.Color(1.0f, 0.0f, 0.0f);			// Red
-            gl.Vertex(0.0f, 1.0f, 0.0f);			// Top Of Triangle (Left)
-            gl.Color(0.0f, 0.0f, 1.0f);			// Blue
-            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Left Of Triangle (Left)
-            gl.Color(0.0f, 1.0f, 0.0f);			// Green
-            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Right Of Triangle (Left)
-            gl.End();						// Done Drawing The Pyramid
-
-            gl.LoadIdentity();
-            gl.Translate(1.5f, 0.0f, -7.0f);				// Move Right And Into The Screen
-
-            gl.Rotate(rquad, 1.0f, 1.0f, 1.0f);			// Rotate The Cube On X, Y & Z
+            gl.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
+            gl.LookAt(eyeX * radius, eyeY, eyeZ * radius, centerX, centerY, centerZ, upX, upY, upZ);
+            //gl.Translate(0f, 0.0f, -7.0f);				// Move Right And Into The Screen
 
             gl.Begin(OpenGL.GL_QUADS);					// Start Drawing The Cube
 
@@ -114,11 +94,16 @@ namespace ClientEngine
 
             gl.Flush();
 
-            rtri += 3.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle 
-            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
+
+
         }
 
-        float rtri = 0;
-        float rquad = 0;
+        private void OpenGlControl_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.Alt)
+            {
+                eyeY += 0.1;
+            }
+        }
     }
 }

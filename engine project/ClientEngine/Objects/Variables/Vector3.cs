@@ -1,4 +1,4 @@
-﻿namespace ClientEngine.Objecten.Variables
+﻿namespace ClientEngine.Objects.Variables
 {
     public class Vector3
     {

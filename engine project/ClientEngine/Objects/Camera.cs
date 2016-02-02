@@ -12,7 +12,7 @@ namespace ClientEngine.Objects
     {
         private Vector3 _eye = new Vector3(0, 0, 1);
         private Vector3 _center = new Vector3();
-        private Vector3 _up = new Vector3();
+        private Vector3 _up = new Vector3(0, 1);
 
         public float Radius = 1f;
 
@@ -55,6 +55,14 @@ namespace ClientEngine.Objects
             }
         }
 
+        private Guid _internalId = Guid.NewGuid();
+        public Guid InternalId
+        {
+            get
+            {
+                return _internalId;
+            }
+        }
         public Camera()
         {
 

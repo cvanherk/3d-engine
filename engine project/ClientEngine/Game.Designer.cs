@@ -44,6 +44,8 @@
             this.GameFrame.Size = new System.Drawing.Size(792, 467);
             this.GameFrame.TabIndex = 0;
             this.GameFrame.OpenGLDraw += new SharpGL.RenderEventHandler(this.GameFrame_Renderer);
+            this.GameFrame.KeyDown += GameFrame_KeyDown;
+            this.GameFrame.KeyUp += GameFrame_KeyUp; 
             // 
             // Game
             // 
@@ -57,6 +59,9 @@
             this.ResumeLayout(false);
 
         }
+
+
+
         #endregion
 
         private SharpGL.OpenGLControl GameFrame;

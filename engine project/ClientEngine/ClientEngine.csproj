@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="Objects\Camera.cs" />
     <Compile Include="Objects\GameObject.cs" />
+    <Compile Include="Objects\IInputManager.cs" />
     <Compile Include="Objects\IGameObject.cs" />
     <Compile Include="Objects\Variables\Mesh.cs" />
     <Compile Include="Objects\Variables\Rotation.cs" />

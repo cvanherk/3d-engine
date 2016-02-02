@@ -49,8 +49,18 @@ namespace ClientEngine.Objects
             }
         }
 
+        private Guid _internalId =  Guid.NewGuid();
+
+        public Guid InternalId
+        {
+            get
+            {
+                return _internalId;
+            } 
+        }
+
         public Color Color = Color.Red;
-        public Mesh Mesh;
+        public Mesh? Mesh;
 
         public bool IsActive = true;
 
@@ -91,10 +101,14 @@ namespace ClientEngine.Objects
 
             renderer.Color(Color.R, Color.G, Color.B);
 
-            foreach (var vertex in Mesh.vertices)
+            if (Mesh?.vertices != null)
             {
-                renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
+                foreach (var vertex in Mesh?.vertices)
+                {
+                    renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
+                }
             }
+            
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using ClientEngine.Objects;
+﻿using ClientEngine.Models;
+using ClientEngine.Objects;
+using ClientEngine.Objects.Variables;
 using ClientEngine.Test;
 using SharpGL;
 using System;

@@ -1,4 +1,4 @@
-﻿using ClientEngine.Objecten.Variables;
+﻿using ClientEngine.Objects.Variables;
 using System;
 using System.Collections.Generic;
 using System.IO;

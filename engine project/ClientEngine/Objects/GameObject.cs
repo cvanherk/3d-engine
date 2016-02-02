@@ -85,12 +85,12 @@ namespace ClientEngine.Objects
             if (!IsActive)
                 return;
 
-            gl.Translate(_position.X, _position.Y, _position.Z);				// Move Right And Into The Screen
-            gl.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);          // Rotate The Cube On X, Y & Z
+            renderer.Translate(_position.X, _position.Y, _position.Z);				// Move Right And Into The Screen
+            renderer.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);          // Rotate The Cube On X, Y & Z
 
-            Game.Camera.Draw(gl);
+            Game.Camera.Draw(renderer);
 
-            gl.Begin(OpenGL.GL_QUADS);					// Start Drawing The Cube
+            renderer.Begin(OpenGL.GL_QUADS);					// Start Drawing The Cube
             renderer.Translate(Position.X, Position.Y, Position.Z);
             renderer.Rotate(Rotation.Angle, Rotation.X, Rotation.Y, Rotation.Z);
             renderer.Begin(OpenGL.GL_QUADS);

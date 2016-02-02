@@ -18,18 +18,25 @@ namespace ClientEngine
             InitializeComponent();
         }
 
-        private void openGLControl2_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+          
+        }
+
+
+        private void openGlControl_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
         {
             //  Get the OpenGL object, just to clean up the code.
-            var gl = openGLControlManual.OpenGL;
+            OpenGL gl = OpenGlControl.OpenGL;
 
-            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            gl.LoadIdentity();
+            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
+            gl.LoadIdentity();                  // Reset The View
 
-            gl.Translate(0f, 0.0f, -6.0f);
-            gl.Rotate(rtri, 0.0f, 1.0f, 0.0f);
+            gl.Translate(-1.5f, 0.0f, -6.0f);				// Move Left And Into The Screen
 
-            gl.Begin(OpenGL.GL_TRIANGLES);
+            gl.Rotate(rtri, 0.0f, 1.0f, 0.0f);				// Rotate The Pyramid On It's Y Axis
+
+            gl.Begin(OpenGL.GL_TRIANGLES);					// Start Drawing The Pyramid
 
             gl.Color(1.0f, 0.0f, 0.0f);			// Red
             gl.Vertex(0.0f, 1.0f, 0.0f);			// Top Of Triangle (Front)
@@ -59,25 +66,9 @@ namespace ClientEngine
             gl.Color(0.0f, 1.0f, 0.0f);			// Green
             gl.Vertex(-1.0f, -1.0f, 1.0f);			// Right Of Triangle (Left)
             gl.End();						// Done Drawing The Pyramid
-        }
-
-        private void buttonRender_Click(object sender, EventArgs e)
-        {
-            openGLControlManual.DoRender();
-        }
-
-        float rtri;
-        float rquad;
-
-        private void openGLControlTimerBased_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
-        {
-            //  Get the OpenGL object, just to clean up the code.
-            var gl = openGLControlTimerBased.OpenGL;
-
-            gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             gl.LoadIdentity();
-            gl.Translate(0f, 0.0f, -7.0f);				// Move Right And Into The Screen
+            gl.Translate(1.5f, 0.0f, -7.0f);				// Move Right And Into The Screen
 
             gl.Rotate(rquad, 1.0f, 1.0f, 1.0f);			// Rotate The Cube On X, Y & Z
 
@@ -119,7 +110,7 @@ namespace ClientEngine
             gl.Vertex(1.0f, 1.0f, 1.0f);			// Top Left Of The Quad (Right)
             gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Right)
             gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Right)
-            gl.End();						// Done Drawing The Q
+            gl.End();                       // Done Drawing The Q
 
             gl.Flush();
 
@@ -127,14 +118,7 @@ namespace ClientEngine
             rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            numericUpDownFPS.Value = openGLControlTimerBased.FrameRate;
-        }
-
-        private void numericUpDownFPS_ValueChanged(object sender, EventArgs e)
-        {
-            openGLControlTimerBased.FrameRate = (int)numericUpDownFPS.Value;
-        }
+        float rtri = 0;
+        float rquad = 0;
     }
 }

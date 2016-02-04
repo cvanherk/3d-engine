@@ -97,7 +97,7 @@ namespace ClientEngine.Objects
             renderer.Translate(_position.X, _position.Y, _position.Z);
             renderer.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);
 
-            renderer.Begin(OpenGL.GL_QUADS);
+            renderer.Begin(OpenGL.GL_LINES);
 
             renderer.Color(Color.R, Color.G, Color.B);
 

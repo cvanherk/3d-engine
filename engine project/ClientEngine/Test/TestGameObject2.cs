@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ClientEngine.Test
 {
-    public class TestGameObject2 : GameObject , IInputManager
+    public class TestGameObject2 :  IInputManager
     {
         
         public TestGameObject2()
@@ -17,8 +17,8 @@ namespace ClientEngine.Test
         }
         public TestGameObject2(float z, float x)
         {
-            Position.Z = z;
-            Position.X = x;
+            //Position.Z = z;
+            //Position.X = x;
         }
 
         public void OnKeyDown(object sender, KeyEventArgs keyEventArgs)

@@ -14,7 +14,7 @@ namespace ClientEngine.Objects
         private Vector3 _center = new Vector3();
         private Vector3 _up = new Vector3(0, 1);
 
-        public float Radius = 1f;
+        public float Radius = 90f;
 
         public Vector3 Position
         {

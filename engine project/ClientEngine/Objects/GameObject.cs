@@ -8,7 +8,9 @@ namespace ClientEngine.Objects
     {
         private Vector3 _position = Vector3.Zero;
         private Rotation _rotation = Rotation.Zero;
-
+        private float _xAcceleration = 0;
+        private float _yAcceleration = 0;
+        private float _zAcceleration = 0;
 
         public Vector3 Position
         {
@@ -20,6 +22,42 @@ namespace ClientEngine.Objects
             set
             {
                 _position = value;
+            }
+        }
+
+        public float xAcceleration
+        {
+            get
+            {
+                return _xAcceleration;
+            }
+            set
+            {
+                _xAcceleration = value;
+            }
+        }
+
+        public float yAcceleration
+        {
+            get
+            {
+                return _yAcceleration;
+            }
+            set
+            {
+                _yAcceleration = value;
+            }
+        }
+
+        public float zAcceleration
+        {
+            get
+            {
+                return _zAcceleration;
+            }
+            set
+            {
+                _zAcceleration = value;
             }
         }
 

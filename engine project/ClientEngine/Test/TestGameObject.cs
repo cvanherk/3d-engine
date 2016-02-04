@@ -18,8 +18,7 @@ namespace ClientEngine.Test
 
         public override void Start()
         {
-            var objLoader = new ObjectImporter();
-            Mesh = objLoader.CreateMeshStruct(@"cube.obj");
+         
         }
 
         private float OnXAccelerate()
@@ -52,7 +51,11 @@ namespace ClientEngine.Test
             {
                 case Keys.W:
                     Position.X += OnXAccelerate();
-                break;
+                    break;
+
+                    case Keys.L:
+                    Rotation.X += OnXAccelerate();
+                    break;
 
                 case Keys.S:
                     Position.X -= OnXAccelerate();

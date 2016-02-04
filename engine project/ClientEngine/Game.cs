@@ -1,8 +1,8 @@
 ﻿using ClientEngine.Models;
 using ClientEngine.Objects;
-using ClientEngine.Objects.Variables;
 using ClientEngine.Test;
 using SharpGL;
+using SharpGL.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,6 @@ namespace ClientEngine
                                                         .Where(t => t.IsSubclassOf(typeof(GameObject)) && !t.IsAbstract).
                                                             Select(t => (GameObject)Activator.CreateInstance(t)).ToList().Where(x=>x.IsActive).ToList();
         public IGameObject Camera = new Camera();
-
         private List<Guid> _objectIds = new List<Guid>();
 
         public Game()
@@ -42,7 +41,12 @@ namespace ClientEngine
             //_gameObjects.Add(gameObject);
 
             //_gameObjects.Add(new TestGameObject2());
-
+            //GameFrame.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
+            GameFrame.OpenGL.Enable(OpenGL.GL_TEXTURE_2D);
+            Camera.Position.Y = 10;
+            Camera.Position.X = -0.3f;
+            Camera.Position.Z = 1;
+           
         }
         /// <summary>
         /// Onkey down op game event.
@@ -77,6 +81,7 @@ namespace ClientEngine
                 }
             }
         }
+       
 
 
         /// <summary>

@@ -1,7 +1,15 @@
 ﻿using ClientEngine.Objects.Variables;
 using SharpGL;
+using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Core;
+using SharpGL.SceneGraph.Primitives;
+using SharpGL.Serialization;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+
+
 namespace ClientEngine.Objects
 {
     public class GameObject : IGameObject
@@ -127,26 +135,78 @@ namespace ClientEngine.Objects
 
         }
 
+        List<Polygon> _polygons;
+
+        private List<Polygon> ImportPolygon(OpenGL gl,string fileName)
+        {
+            List<Polygon> polygons = new List<Polygon>();
+            Scene scene = SerializationEngine.Instance.LoadScene(fileName);
+            if (scene != null)
+            {
+                foreach (var polygon in scene.SceneContainer.Traverse<Polygon>())
+                {
+                    //  Get the bounds of the polygon.
+                    BoundingVolume boundingVolume = polygon.BoundingVolume;
+                    float[] extent = new float[3];
+                    polygon.BoundingVolume.GetBoundDimensions(out extent[0], out extent[1], out extent[2]);
+
+                    //  Get the max extent.
+                    float maxExtent = extent.Max();
+
+                    //  Scale so that we are at most 10 units in size.
+                    float scaleFactor = maxExtent > 10 ? 10.0f / maxExtent : 1;
+                    polygon.Transformation.ScaleX = scaleFactor;
+                    polygon.Transformation.ScaleY = scaleFactor;
+                    polygon.Transformation.ScaleZ = scaleFactor;
+                    //polygon.Freeze(gl);
+                    polygons.Add(polygon);
+                }
+            }
+
+            return polygons;
+        }
+
         public void Draw(OpenGL renderer)
         {
+            if (_polygons == null)
+            {
+                _polygons = ImportPolygon(renderer, @"C:\Users\Corne\Desktop\shuttle.obj");
+            }
             if (!IsActive)
                 return;
 
-            renderer.Translate(_position.X, _position.Y, _position.Z);
-            renderer.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);
 
-            renderer.Begin(OpenGL.GL_QUADS);
 
             renderer.Color(Color.R, Color.G, Color.B);
 
-            if (Mesh?.vertices != null)
+            //  Draw every polygon in the collection.
+            foreach (Polygon polygon in _polygons)
             {
-                foreach (var vertex in Mesh?.vertices)
-                {
-                    renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
-                }
+                polygon.PushObjectSpace(renderer);
+                polygon.Render(renderer, RenderMode.Render);
+                polygon.PopObjectSpace(renderer);
+
+                polygon.Transformation.TranslateX = _position.X;
+                polygon.Transformation.TranslateY = _position.Y;
+                polygon.Transformation.TranslateZ = _position.Z;
+
+                polygon.Transformation.RotateX = _rotation.X;
+                polygon.Transformation.RotateY = _rotation.Y;
+                polygon.Transformation.RotateZ = _rotation.Z;
+
             }
-            
+        
+
+
+            //if (Mesh?.vertices != null)
+            //{
+
+            //    foreach (var vertex in Mesh?.vertices)
+            //    {
+            //        renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
+            //    }
+            //}
+
         }
     }
 }

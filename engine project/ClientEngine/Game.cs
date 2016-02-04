@@ -24,8 +24,8 @@ namespace ClientEngine
         {
             InitializeComponent();
             //obj loader laad de vertixe en faces in
-            var objLoader = new ObjectImporter();
-            var mesh = objLoader.CreateMeshStruct(@"cube.obj");
+            //var objLoader = new ObjectImporter();
+            //var mesh = objLoader.CreateMeshStruct(@"cube.obj");
 
             ////test gameobject
             //var gameObject = new GameObject

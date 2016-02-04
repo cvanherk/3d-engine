@@ -1,4 +1,5 @@
-﻿using ClientEngine.Objects;
+﻿using ClientEngine.Models;
+using ClientEngine.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,13 @@ namespace ClientEngine.Test
     {
         public TestGameObject()
         {
+            Position.Z = -7f;
+        } 
 
-        }
-        public TestGameObject(float x, float y, float z)
+        public override void Start()
         {
-            Position.X = x;
-            Position.Y = y;
-            Position.Z = z;
-          
+            var objLoader = new ObjectImporter();
+            Mesh = objLoader.CreateMeshStruct(@"cube.obj");
         }
 
         public void OnKeyDown(object sender, KeyEventArgs keyEventArgs)

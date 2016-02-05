@@ -20,6 +20,8 @@ namespace ClientEngine.Objects
         private float _yAcceleration = 0;
         private float _zAcceleration = 0;
 
+
+
         public Vector3 Position
         {
             get
@@ -110,6 +112,8 @@ namespace ClientEngine.Objects
 
         public bool IsActive = true;
 
+        public string ObjFilePath;
+
         public GameObject()
         {
             Start();
@@ -135,30 +139,30 @@ namespace ClientEngine.Objects
 
         }
 
-        List<Polygon> _polygons;
+        private List<Polygon> _polygons;
 
-        private List<Polygon> ImportPolygon(OpenGL gl,string fileName)
+        internal List<Polygon> ImporObjFile(OpenGL gl,string fileName)
         {
-            List<Polygon> polygons = new List<Polygon>();
-            Scene scene = SerializationEngine.Instance.LoadScene(fileName);
+            var polygons = new List<Polygon>();
+            var scene = SerializationEngine.Instance.LoadScene(fileName);
             if (scene != null)
             {
                 foreach (var polygon in scene.SceneContainer.Traverse<Polygon>())
                 {
                     //  Get the bounds of the polygon.
-                    BoundingVolume boundingVolume = polygon.BoundingVolume;
-                    float[] extent = new float[3];
+                    var boundingVolume = polygon.BoundingVolume;
+                    var extent = new float[3];
                     polygon.BoundingVolume.GetBoundDimensions(out extent[0], out extent[1], out extent[2]);
 
                     //  Get the max extent.
-                    float maxExtent = extent.Max();
+                    var maxExtent = extent.Max();
 
                     //  Scale so that we are at most 10 units in size.
-                    float scaleFactor = maxExtent > 10 ? 10.0f / maxExtent : 1;
+                    var scaleFactor = maxExtent > 10 ? 10.0f / maxExtent : 1;
                     polygon.Transformation.ScaleX = scaleFactor;
                     polygon.Transformation.ScaleY = scaleFactor;
                     polygon.Transformation.ScaleZ = scaleFactor;
-                    //polygon.Freeze(gl);
+                    polygon.Freeze(gl);
                     polygons.Add(polygon);
                 }
             }
@@ -168,14 +172,14 @@ namespace ClientEngine.Objects
 
         public void Draw(OpenGL renderer)
         {
+            
+            //Zijn de polygons geladen?
             if (_polygons == null)
-            {
-                _polygons = ImportPolygon(renderer, @"C:\Users\Corne\Desktop\shuttle.obj");
-            }
+                _polygons = ImporObjFile(renderer, ObjFilePath);
+
+
             if (!IsActive)
                 return;
-
-
 
             renderer.Color(Color.R, Color.G, Color.B);
 
@@ -195,17 +199,6 @@ namespace ClientEngine.Objects
                 polygon.Transformation.RotateZ = _rotation.Z;
 
             }
-        
-
-
-            //if (Mesh?.vertices != null)
-            //{
-
-            //    foreach (var vertex in Mesh?.vertices)
-            //    {
-            //        renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
-            //    }
-            //}
 
         }
     }

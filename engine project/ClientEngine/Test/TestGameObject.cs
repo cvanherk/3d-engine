@@ -1,10 +1,5 @@
-﻿using ClientEngine.Models;
-using ClientEngine.Objects;
+﻿using ClientEngine.Objects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientEngine.Test
@@ -14,6 +9,7 @@ namespace ClientEngine.Test
         public TestGameObject()
         {
             Position.Z = -10f;
+            ObjFilePath = @"C:\Users\Corne\Desktop\shuttle.obj";
         } 
 
         public override void Start()

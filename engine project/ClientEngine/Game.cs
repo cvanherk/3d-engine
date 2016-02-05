@@ -1,5 +1,4 @@
-﻿using ClientEngine.Models;
-using ClientEngine.Objects;
+﻿using ClientEngine.Objects;
 using ClientEngine.Test;
 using SharpGL;
 using SharpGL.Enumerations;
@@ -42,7 +41,8 @@ namespace ClientEngine
 
             //_gameObjects.Add(new TestGameObject2());
             //GameFrame.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
-            GameFrame.OpenGL.Enable(OpenGL.GL_TEXTURE_2D);
+            //GameFrame.OpenGL.Enable(OpenGL.GL_TEXTURE_2D);
+            //GameFrame.OpenGL.EnableClientState(OpenGL.GL_POLYGON);
             Camera.Position.Y = 10;
             Camera.Position.X = -0.3f;
             Camera.Position.Z = 1;
@@ -105,11 +105,12 @@ namespace ClientEngine
                     DestroyGameObject(gameObject);
                     continue;
                 }
+            
                 renderer.LoadIdentity();
                 gameObject.Update();
                 Camera.Draw(renderer);
                 gameObject.Draw(renderer);
-                renderer.End();
+                //renderer.End();
                 renderer.Flush();
             }
         }

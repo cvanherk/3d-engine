@@ -7,6 +7,7 @@ using SharpGL.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 
 
@@ -19,6 +20,7 @@ namespace ClientEngine.Objects
         private float _xAcceleration = 0;
         private float _yAcceleration = 0;
         private float _zAcceleration = 0;
+        protected string Texture;
 
 
 
@@ -97,26 +99,56 @@ namespace ClientEngine.Objects
             }
         }
 
-        private Guid _internalId =  Guid.NewGuid();
+        private Guid _internalId = Guid.NewGuid();
 
         public Guid InternalId
         {
             get
             {
                 return _internalId;
-            } 
+            }
         }
 
-        public Color Color = Color.Red;
+        public Color Color = Color.White;
         public Mesh? Mesh;
 
         public bool IsActive = true;
 
         public string ObjFilePath;
 
+        private uint[] _textures = new uint[1];
+
         public GameObject()
         {
             Start();
+        }
+
+        public void InitTexture(OpenGL renderer)
+        {
+            if (String.IsNullOrEmpty(Texture))
+            {
+                return;
+            }
+
+            //  We need to load the texture from file.
+            var textureImage = new Bitmap(Texture);
+
+            renderer.Enable(OpenGL.GL_TEXTURE_2D);
+            //  Get one texture id, and stick it into the textures array.
+            renderer.GenTextures(1, _textures);
+
+            //  Bind the texture.
+            renderer.BindTexture(OpenGL.GL_TEXTURE_2D, _textures[0]);
+
+            //  Tell OpenGL where the texture data is.
+            renderer.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, 3, textureImage.Width, textureImage.Height, 0, OpenGL.GL_BGR, OpenGL.GL_UNSIGNED_BYTE,
+                textureImage.LockBits(new Rectangle(0, 0, textureImage.Width, textureImage.Height),
+                ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb).Scan0);
+
+            //  Specify linear filtering.
+            renderer.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR);
+
+
         }
 
         public void Destroy(GameObject gameObject)
@@ -181,7 +213,7 @@ namespace ClientEngine.Objects
             if (!IsActive)
                 return;
 
-            //renderer.Color(Color.R, Color.G, Color.B);
+            renderer.Color(Color.R, Color.G, Color.B);
 
             //  Draw every polygon in the collection.
             foreach (Polygon polygon in _polygons)

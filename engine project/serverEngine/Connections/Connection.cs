@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using serverEngine.Net;
+using serverEngine.Players;
 
 namespace serverEngine.Connections
 {
@@ -13,6 +14,8 @@ namespace serverEngine.Connections
         public List<Byte> ChuckedRawPacket;
         
         public bool IsConnected;
+
+        public Player Player;
 
         public Connection()
         {

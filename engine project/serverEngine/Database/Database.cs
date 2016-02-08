@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-namespace serverEngine.Database
+namespace serverEngine.Data
 {
     public class Database
     {

@@ -47,12 +47,14 @@
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Debug\Debugging.cs" />
     <Compile Include="Net\Handlers\InvalidHandler.cs" />
+    <Compile Include="Net\Handlers\LoginHandler.cs" />
     <Compile Include="Net\Handlers\PositionHandler.cs" />
     <Compile Include="Net\Packet.cs" />
     <Compile Include="Net\PacketAttribute.cs" />
     <Compile Include="Net\PacketBuilder.cs" />
     <Compile Include="Net\PacketHandler.cs" />
     <Compile Include="Net\PacketHandlers.cs" />
+    <Compile Include="Players\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

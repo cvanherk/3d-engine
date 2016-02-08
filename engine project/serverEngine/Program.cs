@@ -32,7 +32,8 @@ namespace serverEngine
             {
                 //maakt ipendpoint voor server listening
                 //luistert naar 
-                var iPEndPoint = new IPEndPoint(0, Config.ServerPort);
+                var ip = IPAddress.Parse("0.0.0.0");
+                var iPEndPoint = new IPEndPoint(ip, Config.ServerPort);
                 _serverListenerSocket = new Socket(iPEndPoint.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 _serverListenerSocket.Bind(iPEndPoint);
                 _serverListenerSocket.Listen(25);

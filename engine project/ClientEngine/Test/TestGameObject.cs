@@ -12,7 +12,7 @@ namespace ClientEngine.Test
             //Position.X = -15f;
             //Position.Y = 4f;
             ObjFilePath = @"C:\Users\Corne\Desktop\blokje.obj";
-           // Texture = @"C:\Users\Corne\Desktop\4166276_t.jpg";
+            Texture = @"C:\Users\Corne\Desktop\4166276_t.jpg";
         } 
 
         public override void Start()

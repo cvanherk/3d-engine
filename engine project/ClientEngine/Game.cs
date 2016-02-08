@@ -147,26 +147,14 @@ namespace ClientEngine
         Bitmap textureImage;
         private void GameFrame_OpenGLInitialized(object sender, EventArgs e)
         {
-            //var renderer = GameFrame.OpenGL;
 
-            ////  We need to load the texture from file.
-            ////textureImage = new Bitmap(@"C:\Users\Corne\Desktop\A10.png");
+            foreach (var gameObject in _gameObjects)
+            {
+                gameObject.InitTexture(GameFrame.OpenGL);
+            }
 
-            //renderer.Enable(OpenGL.GL_TEXTURE_2D);
-            ////  Get one texture id, and stick it into the textures array.
-            //renderer.GenTextures(1, textures);
 
-            ////  Bind the texture.
-            //renderer.BindTexture(OpenGL.GL_TEXTURE_2D, textures[0]);
-
-            ////  Tell OpenGL where the texture data is.
-            //renderer.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, 3, textureImage.Width, textureImage.Height, 0, OpenGL.GL_BGR, OpenGL.GL_UNSIGNED_BYTE,
-            //    textureImage.LockBits(new Rectangle(0, 0, textureImage.Width, textureImage.Height),
-            //    ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb).Scan0);
-
-            ////  Specify linear filtering.
-            //renderer.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR);
-
+           
 
         }
 

@@ -1,4 +1,5 @@
 ﻿using ClientEngine.Objects.Variables;
+using SharpGL;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

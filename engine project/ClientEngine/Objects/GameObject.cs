@@ -135,18 +135,62 @@ namespace ClientEngine.Objects
             renderer.Translate(_position.X, _position.Y, _position.Z);
             renderer.Rotate(_rotation.Angle, _rotation.X, _rotation.Y, _rotation.Z);
 
-            renderer.Begin(OpenGL.GL_LINES);
+            renderer.Begin(OpenGL.GL_QUADS);
 
             renderer.Color(Color.R, Color.G, Color.B);
 
-            if (Mesh?.vertices != null)
-            {
-                foreach (var vertex in Mesh?.vertices)
-                {
-                    renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
-                }
-            }
-            
+            //if (Mesh?.vertices != null)
+            //{
+            //    foreach (var vertex in Mesh?.vertices)
+            //    {
+            //        renderer.Vertex(vertex.X, vertex.Y, vertex.Z);
+            //    }
+            //}
+
+            //if (Mesh?.normals != null)
+            //{
+            //    foreach (var normal in Mesh?.normals)
+            //    {
+            //        renderer.Normal(normal.X, normal.Y, normal.Z);
+            //    }
+            //}
+            var gl = renderer;
+            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Top)
+            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Top)
+            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Bottom Left Of The Quad (Top)
+            gl.Vertex(1.0f, 1.0f, 1.0f);			// Bottom Right Of The Quad (Top)
+
+
+            gl.Color(1.0f, 0.5f, 0.0f);			// Set The Color To Orange
+            gl.Vertex(1.0f, -1.0f, 1.0f);			// Top Right Of The Quad (Bottom)
+            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Top Left Of The Quad (Bottom)
+            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Bottom)
+            gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Bottom)
+
+            gl.Color(1.0f, 0.0f, 0.0f);			// Set The Color To Red
+            gl.Vertex(1.0f, 1.0f, 1.0f);			// Top Right Of The Quad (Front)
+            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Top Left Of The Quad (Front)
+            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Front)
+            gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Right Of The Quad (Front)
+
+            gl.Color(1.0f, 1.0f, 0.0f);			// Set The Color To Yellow
+            gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Back)
+            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Back)
+            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Back)
+            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Back)
+
+            gl.Color(0.0f, 0.0f, 1.0f);			// Set The Color To Blue
+            gl.Vertex(-1.0f, 1.0f, 1.0f);			// Top Right Of The Quad (Left)
+            gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Left)
+            gl.Vertex(-1.0f, -1.0f, -1.0f);			// Bottom Left Of The Quad (Left)
+            gl.Vertex(-1.0f, -1.0f, 1.0f);			// Bottom Right Of The Quad (Left)
+
+            gl.Color(1.0f, 0.0f, 1.0f);			// Set The Color To Violet
+            gl.Vertex(1.0f, 1.0f, -1.0f);			// Top Right Of The Quad (Right)
+            gl.Vertex(1.0f, 1.0f, 1.0f);			// Top Left Of The Quad (Right)
+            gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Right)
+            gl.Vertex(1.0f, -1.0f, -1.0f);          // Bottom Right Of The Quad (Right)
+
         }
     }
 }

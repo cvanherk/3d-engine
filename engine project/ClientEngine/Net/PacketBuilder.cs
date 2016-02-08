@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace serverEngine.Net
+namespace clientEngine.Net
 {
     class PacketBuilder
     {
@@ -31,6 +27,7 @@ namespace serverEngine.Net
         {
             var bytes = BitConverter.GetBytes(value);
             Buffer.BlockCopy(bytes, 0, _data, _currentWriteOfset, bytes.Length);
+            _currentWriteOfset += 4;
         }
 
         public int ReadInt32()

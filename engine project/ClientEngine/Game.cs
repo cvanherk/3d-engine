@@ -4,6 +4,8 @@ using SharpGL;
 using SharpGL.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -21,28 +23,7 @@ namespace ClientEngine
         public Game()
         {
             InitializeComponent();
-            //obj loader laad de vertixe en faces in
-            //var objLoader = new ObjectImporter();
-            //var mesh = objLoader.CreateMeshStruct(@"cube.obj");
 
-            ////test gameobject
-            //var gameObject = new GameObject
-            //{
-            //    Position = new Vector3
-            //    {
-            //        X = 0,
-            //        Y = 0,
-            //        Z = -7.5f,
-            //    },
-
-            //    Mesh = mesh,
-            //};
-            //_gameObjects.Add(gameObject);
-
-            //_gameObjects.Add(new TestGameObject2());
-            //GameFrame.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
-            //GameFrame.OpenGL.Enable(OpenGL.GL_TEXTURE_2D);
-            //GameFrame.OpenGL.EnableClientState(OpenGL.GL_POLYGON);
             Camera.Position.Y = 10;
             Camera.Position.X = -0.3f;
             Camera.Position.Z = 1;
@@ -81,7 +62,35 @@ namespace ClientEngine
                 }
             }
         }
-       
+        
+        //  The texture identifier.
+        uint[] textures = new uint[1];
+        //  Storage the texture itself.
+        Bitmap textureImage;
+        private void GameFrame_OpenGLInitialized(object sender, EventArgs e)
+        {
+            //var renderer = GameFrame.OpenGL;
+
+            ////  We need to load the texture from file.
+            ////textureImage = new Bitmap(@"C:\Users\Corne\Desktop\A10.png");
+
+            //renderer.Enable(OpenGL.GL_TEXTURE_2D);
+            ////  Get one texture id, and stick it into the textures array.
+            //renderer.GenTextures(1, textures);
+
+            ////  Bind the texture.
+            //renderer.BindTexture(OpenGL.GL_TEXTURE_2D, textures[0]);
+
+            ////  Tell OpenGL where the texture data is.
+            //renderer.TexImage2D(OpenGL.GL_TEXTURE_2D, 0, 3, textureImage.Width, textureImage.Height, 0, OpenGL.GL_BGR, OpenGL.GL_UNSIGNED_BYTE,
+            //    textureImage.LockBits(new Rectangle(0, 0, textureImage.Width, textureImage.Height),
+            //    ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb).Scan0);
+
+            ////  Specify linear filtering.
+            //renderer.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR);
+
+
+        }
 
 
         /// <summary>
@@ -108,6 +117,7 @@ namespace ClientEngine
             
                 renderer.LoadIdentity();
                 gameObject.Update();
+                //renderer.Begin(OpenGL.GL_QUADS);
                 Camera.Draw(renderer);
                 gameObject.Draw(renderer);
                 //renderer.End();

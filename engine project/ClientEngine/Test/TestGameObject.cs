@@ -8,8 +8,10 @@ namespace ClientEngine.Test
     {
         public TestGameObject()
         {
-            Position.Z = -10f;
-            ObjFilePath = @"C:\Users\Corne\Desktop\shuttle.obj";
+            //Position.Z = 55f;
+            //Position.X = -15f;
+            //Position.Y = 4f;
+            ObjFilePath = @"C:\Users\Corne\Desktop\blokje.obj";
         } 
 
         public override void Start()
@@ -43,19 +45,19 @@ namespace ClientEngine.Test
         {
             Console.WriteLine($"OnkeyDown: {keyEventArgs.KeyCode}");
 
-            switch(keyEventArgs.KeyCode)
+            switch (keyEventArgs.KeyCode)
             {
                 case Keys.W:
                     Position.X += OnXAccelerate();
                     break;
 
-                    case Keys.L:
+                case Keys.L:
                     Rotation.X += OnXAccelerate();
                     break;
 
                 case Keys.S:
                     Position.X -= OnXAccelerate();
-                break;
+                    break;
 
                 case Keys.D:
                     Position.Z += OnZAccelerate();

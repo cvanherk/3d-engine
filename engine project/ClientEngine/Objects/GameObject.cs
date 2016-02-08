@@ -181,12 +181,13 @@ namespace ClientEngine.Objects
             if (!IsActive)
                 return;
 
-            renderer.Color(Color.R, Color.G, Color.B);
+            //renderer.Color(Color.R, Color.G, Color.B);
 
             //  Draw every polygon in the collection.
             foreach (Polygon polygon in _polygons)
             {
                 polygon.PushObjectSpace(renderer);
+
                 polygon.Render(renderer, RenderMode.Render);
                 polygon.PopObjectSpace(renderer);
 

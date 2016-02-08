@@ -35,7 +35,7 @@
             // 
             this.GameFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GameFrame.DrawFPS = false;
-            this.GameFrame.FrameRate = 28;
+            this.GameFrame.FrameRate = 60;
             this.GameFrame.Location = new System.Drawing.Point(0, 0);
             this.GameFrame.Name = "GameFrame";
             this.GameFrame.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
@@ -45,7 +45,9 @@
             this.GameFrame.TabIndex = 0;
             this.GameFrame.OpenGLDraw += new SharpGL.RenderEventHandler(this.GameFrame_Renderer);
             this.GameFrame.KeyDown += GameFrame_KeyDown;
-            this.GameFrame.KeyUp += GameFrame_KeyUp; 
+            this.GameFrame.KeyUp += GameFrame_KeyUp;
+            this.GameFrame.DrawFPS = true;
+            this.GameFrame.OpenGLInitialized += GameFrame_OpenGLInitialized;
             // 
             // Game
             // 
@@ -59,7 +61,6 @@
             this.ResumeLayout(false);
 
         }
-
 
 
         #endregion

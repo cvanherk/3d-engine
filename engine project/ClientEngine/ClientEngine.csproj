@@ -55,6 +55,14 @@
     <Compile Include="Game.Designer.cs">
       <DependentUpon>Game.cs</DependentUpon>
     </Compile>
+    <Compile Include="Net\Connection.cs" />
+    <Compile Include="Net\Handler\InvalidHandler.cs" />
+    <Compile Include="Net\Handler\PositionHandler.cs" />
+    <Compile Include="Net\Packet.cs" />
+    <Compile Include="Net\PacketAttribute.cs" />
+    <Compile Include="Net\PacketBuilder.cs" />
+    <Compile Include="Net\PacketHandler.cs" />
+    <Compile Include="Net\PacketHandlers.cs" />
     <Compile Include="Objects\Camera.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Objects\IInputManager.cs" />

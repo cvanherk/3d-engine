@@ -200,7 +200,7 @@ namespace ClientEngine.Objects
                 polygon.Transformation.RotateZ = _rotation.Z;
 
             }
-
+            
         }
     }
 }

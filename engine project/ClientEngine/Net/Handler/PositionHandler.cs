@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using serverEngine.Connections;
+﻿using ClientEngine;
+using System;
 
-namespace serverEngine.Net.Handlers
+namespace clientEngine.Net.Handlers
 {
     [Packet(PacketId.Position)]
     class PositionHandler : PacketHandler
     {
-        public void HandlePacket(Connection connection, Packet packet)
+        public void HandlePacket(Game connection, Packet packet)
         {
             var packetBuilderGet = new PacketBuilder(packet);
 
@@ -23,7 +19,7 @@ namespace serverEngine.Net.Handlers
 
             p = packetBuilder.ToPacket();
 
-            connection.SendPacket(p);
+           connection.Connection.SendPacket(p);
         }
     }
 }

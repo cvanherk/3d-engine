@@ -11,7 +11,7 @@ namespace ClientEngine.Test
             //Position.Z = 55f;
             //Position.X = -15f;
             //Position.Y = 4f;
-            ObjFilePath = @"C:\Users\Corne\Desktop\blokje.obj";
+            ObjFilePath = @"C:\Users\Freijlord\Desktop\blokje.obj";
            // Texture = @"C:\Users\Corne\Desktop\4166276_t.jpg";
         } 
 

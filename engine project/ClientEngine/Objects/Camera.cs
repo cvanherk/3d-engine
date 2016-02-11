@@ -13,10 +13,37 @@ namespace ClientEngine.Objects
         private Vector3 _eye = new Vector3(0, 0, 1);
         private Vector3 _center = new Vector3();
         private Vector3 _up = new Vector3(0, 1);
+        private Vector3 _position = new Vector3(0, 0, 0);
 
         public float Radius = 90f;
 
         public Vector3 Position
+        {
+            get
+            {
+                return _position;
+            }
+
+            set
+            {
+                _position = value;
+            }
+        }
+
+        public Vector3 Center
+        {
+            get
+            {
+                return _center;
+            }
+
+            set
+            {
+                _center = value;
+            }
+        }
+
+        public Vector3 LookAtPosition
         {
             get
             {
@@ -76,7 +103,8 @@ namespace ClientEngine.Objects
         public void Draw(OpenGL renderer)
         {
             renderer.MatrixMode(SharpGL.Enumerations.MatrixMode.Modelview);
-            renderer.LookAt(_eye.X * Radius, _eye.Y, _eye.Z * Radius, _center.X, _center.Y, _center.Z, _up.X, _up.Y, _up.Z);
+            renderer.LookAt(_eye.X * Radius, _eye.Y * Radius, _eye.Z * Radius, _center.X * Radius, _center.Y * Radius, _center.Z * Radius, _up.X, _up.Y, _up.Z);
+            renderer.Translate(_position.X, _position.Y, _position.Z);
         }
 
         public void OnDestroy()

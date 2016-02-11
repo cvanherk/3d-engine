@@ -33,17 +33,18 @@ namespace ClientEngine
                 Connection = new Connection(this);
                 Connection.buffer = new byte[5000];
                 Connection.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                Connection.socket.Connect("127.0.0.1",1337);
+                Connection.socket.Connect("169.254.60.131",1337);
                 Connection.socket.BeginReceive(Connection.buffer, 0, Connection.buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), Connection);
 
                 IsRunning = true;
                 new Thread(GameThread).Start();
 
 
+               
+                var packetBuilder = new PacketBuilder(PacketId.Login);
+                packetBuilder.WriteString("corne");
+                packetBuilder.WriteString("password");
 
-                var packet = new Packet(PacketId.Position);
-                var packetBuilder = new PacketBuilder(packet);
-                packetBuilder.WriteInt32(12);
                 Connection.SendPacket(packetBuilder.ToPacket());
             }
             catch (SocketException socketEx)

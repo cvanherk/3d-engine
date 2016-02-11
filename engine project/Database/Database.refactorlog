@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="9abb1b1b-d6e0-4b36-a1eb-d136a27c67b2" ChangeDateTime="02/08/2016 10:12:57">
+    <Property Name="ElementName" Value="[dbo].[Player].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Player]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RecordGUID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c241b75f-6890-4b6b-95f8-18610e88ea5f" ChangeDateTime="02/08/2016 10:17:22">
+    <Property Name="ElementName" Value="[dbo].[Player].[Rotate_x]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Player]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Rotation_x" />
+  </Operation>
+</Operations>

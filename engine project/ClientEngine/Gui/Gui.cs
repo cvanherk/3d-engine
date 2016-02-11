@@ -23,11 +23,6 @@ namespace ClientEngine.Gui
             return new Gui(openGL);
         }
 
-        public static void DrawTextBox()
-        {
-            _openGl.Draw
-        }
-
         public void DrawLabel(Vector2 position, string faceName, float fontSize, string text, Color? color = null)
         {
             Color c;

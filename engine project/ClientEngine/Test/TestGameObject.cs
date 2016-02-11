@@ -12,8 +12,8 @@ namespace ClientEngine.Test
             //Position.Z = 55f;
             //Position.X = -15f;
             //Position.Y = 4f;
-            ObjFilePath = @"C:\Users\Freijlord\Desktop\blokje.obj";
-            Texture = @"C:\Users\Freijlord\Desktop\4166276_t.jpg";
+            ObjFilePath = @"C:\Users\Corne\Desktop\blokje.obj";
+            Texture = @"C:\Users\Corne\Desktop\4166276_t.jpg";
         } 
 
         public override void Start()
@@ -54,12 +54,20 @@ namespace ClientEngine.Test
             yAcceleration = 0;
         }
 
+        public override void OnGui()
+        {
+            Gui.DrawLabel(new Vector2(0, 0), "Courier New", 12, "test");
+        }
+
         public void OnKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
             Console.WriteLine($"OnkeyDown: {keyEventArgs.KeyCode}");
 
             switch (keyEventArgs.KeyCode)
             {
+                case Keys.T:
+                   
+                    break;
                 case Keys.W:
                     Position.Y += OnYAccelerate();
                     Game.Camera.Position = new Vector3(-Position.X, -Position.Y, -Position.Z);

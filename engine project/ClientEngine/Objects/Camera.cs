@@ -111,5 +111,9 @@ namespace ClientEngine.Objects
         {
             
         }
+
+        public void OnGui()
+        { 
+        }
     }
 }

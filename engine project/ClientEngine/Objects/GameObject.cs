@@ -22,6 +22,8 @@ namespace ClientEngine.Objects
         private float _zAcceleration = 0;
         protected string Texture;
 
+        public Gui.Gui Gui;
+
         public Vector3 Position
         {
             get
@@ -236,6 +238,11 @@ namespace ClientEngine.Objects
                 polygon.Transformation.RotateZ = _rotation.Z;
 
             }
+            
+        }
+
+        public virtual void OnGui()
+        {
             
         }
     }

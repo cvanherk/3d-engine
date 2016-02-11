@@ -19,5 +19,6 @@ namespace ClientEngine.Objects
         void Draw(OpenGL openGl);
         void OnDestroy();
         Guid InternalId { get; }
+        void OnGui();
     }
 }

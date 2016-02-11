@@ -1,5 +1,6 @@
 ﻿using clientEngine.Net;
 using ClientEngine.Objects;
+using ClientEngine.Objects.Variables;
 using serverEngine.Connections;
 using SharpGL;
 using SharpGL.Enumerations;
@@ -25,6 +26,7 @@ namespace ClientEngine
 
         public Connection Connection;
         private bool IsRunning = false;
+
         public Game()
         {
             InitializeComponent();
@@ -33,8 +35,8 @@ namespace ClientEngine
                 Connection = new Connection(this);
                 Connection.buffer = new byte[5000];
                 Connection.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                Connection.socket.Connect("169.254.60.131",1337);
-                Connection.socket.BeginReceive(Connection.buffer, 0, Connection.buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), Connection);
+                //Connection.socket.Connect("169.254.60.131",1337);
+                //Connection.socket.BeginReceive(Connection.buffer, 0, Connection.buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), Connection);
 
                 IsRunning = true;
                 new Thread(GameThread).Start();
@@ -52,6 +54,7 @@ namespace ClientEngine
                 IsRunning = false;
                 Console.WriteLine(socketEx.Message);
             }
+
         }
 
         private void ReceiveCallback(IAsyncResult result)
@@ -105,7 +108,7 @@ namespace ClientEngine
             while (IsRunning)
             {
 
-        }
+            }
         }
 
         /// <summary>
@@ -145,7 +148,6 @@ namespace ClientEngine
         //  The texture identifier.
         uint[] textures = new uint[1];
         //  Storage the texture itself.
-        Bitmap textureImage;
         private void GameFrame_OpenGLInitialized(object sender, EventArgs e)
         {
 
@@ -170,17 +172,24 @@ namespace ClientEngine
             //haalt de opengl renderer op en cleart het scherm
             var renderer = GameFrame.OpenGL;
             renderer.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-
+           
             //loopt door de game objecten heen en drawt deze
             for (int i = 0; i < GameObjects.Count; i++)
             {
                 var gameObject = GameObjects[i];
+                if (gameObject.Gui == null)
+                {
+                    gameObject.Gui = Gui.Gui.NewInstance(GameFrame.OpenGL);
+                }
 
+                //gameObject.Gui.DrawLabel(new Vector2(10, 10), "Courier New", 12, "test");
                 if (gameObject.IsDestroyed)
                 {
                     DestroyGameObject(gameObject);
                     continue;
                 }
+
+                gameObject.OnGui();
             
                 renderer.LoadIdentity();
                 gameObject.Update();

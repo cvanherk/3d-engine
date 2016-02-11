@@ -22,8 +22,6 @@ namespace ClientEngine.Objects
         private float _zAcceleration = 0;
         protected string Texture;
 
-
-
         public Vector3 Position
         {
             get
@@ -121,6 +119,12 @@ namespace ClientEngine.Objects
         public GameObject()
         {
             Start();
+        }
+
+        public static void Instantiate(IGameObject gameObject)
+        {
+            Game.GameObjects.Add((GameObject)gameObject);
+            Game.GameObjects[Game.GameObjects.Count-1].Position = new Vector3(0, Game.GameObjects.Count, 0);
         }
 
         public void InitTexture(OpenGL renderer)

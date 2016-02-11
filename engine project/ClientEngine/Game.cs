@@ -17,10 +17,10 @@ namespace ClientEngine
 {
     partial class Game : Form
     {
-        private List<GameObject> _gameObjects = Assembly.GetExecutingAssembly().GetTypes()
+        public static List<GameObject> GameObjects = Assembly.GetExecutingAssembly().GetTypes()
                                                         .Where(t => t.IsSubclassOf(typeof(GameObject)) && !t.IsAbstract).
                                                             Select(t => (GameObject)Activator.CreateInstance(t)).ToList().Where(x=>x.IsActive).ToList();
-        public IGameObject Camera = new Camera();
+        public static IGameObject Camera = new Camera();
         private List<Guid> _objectIds = new List<Guid>();
 
         public Connection Connection;
@@ -115,13 +115,13 @@ namespace ClientEngine
         /// <param name="e"></param>
         private void GameFrame_KeyDown(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in _gameObjects)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
-                if (gameObject.IsActive)
+                if (GameObjects[i].IsActive)
                 {
-                    if (gameObject is IInputManager)
+                    if (GameObjects[i] is IInputManager)
                     {
-                        ((IInputManager)gameObject).OnKeyDown(sender, e);
+                        ((IInputManager)GameObjects[i]).OnKeyDown(sender, e);
                     }
                 }
 
@@ -130,13 +130,13 @@ namespace ClientEngine
 
         private void GameFrame_KeyUp(object sender, KeyEventArgs e)
         {
-            foreach (var gameObject in _gameObjects)
+            for (int i=0; i < GameObjects.Count; i++)
             {
-                if (gameObject.IsActive)
+                if (GameObjects[i].IsActive)
                 {
-                    if (gameObject is IInputManager)
+                    if (GameObjects[i] is IInputManager)
                     {
-                        ((IInputManager)gameObject).OnKeyUp(sender, e);
+                        ((IInputManager)GameObjects[i]).OnKeyUp(sender, e);
                     }
                 }
             }
@@ -149,7 +149,7 @@ namespace ClientEngine
         private void GameFrame_OpenGLInitialized(object sender, EventArgs e)
         {
 
-            foreach (var gameObject in _gameObjects)
+            foreach (var gameObject in GameObjects)
             {
                 gameObject.InitTexture(GameFrame.OpenGL);
             }
@@ -172,9 +172,9 @@ namespace ClientEngine
             renderer.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             //loopt door de game objecten heen en drawt deze
-            for (int i = 0; i < _gameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
-                var gameObject = _gameObjects[i];
+                var gameObject = GameObjects[i];
 
                 if (gameObject.IsDestroyed)
                 {
@@ -199,7 +199,7 @@ namespace ClientEngine
         private void DestroyGameObject(GameObject gameObject)
         {
             gameObject.OnDestroy();
-            _gameObjects.Remove(gameObject);
+            GameObjects.Remove(gameObject);
         }
     }
 }

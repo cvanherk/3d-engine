@@ -6,6 +6,7 @@ using SharpGL;
 using SharpGL.Enumerations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -30,13 +31,15 @@ namespace ClientEngine
         public Game()
         {
             InitializeComponent();
+
+
             try
             {
                 Connection = new Connection(this);
                 Connection.buffer = new byte[5000];
                 Connection.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                //Connection.socket.Connect("169.254.60.131",1337);
-                //Connection.socket.BeginReceive(Connection.buffer, 0, Connection.buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), Connection);
+                Connection.socket.Connect("169.254.60.131",1337);
+                Connection.socket.BeginReceive(Connection.buffer, 0, Connection.buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), Connection);
 
                 IsRunning = true;
                 new Thread(GameThread).Start();
@@ -125,7 +128,10 @@ namespace ClientEngine
                     if (GameObjects[i] is IInputManager)
                     {
                         ((IInputManager)GameObjects[i]).OnKeyDown(sender, e);
+                        Camera.Draw(GameFrame.OpenGL);
+                        GameObjects[i].Draw(GameFrame.OpenGL);
                     }
+                      
                 }
 
             }
@@ -133,7 +139,7 @@ namespace ClientEngine
 
         private void GameFrame_KeyUp(object sender, KeyEventArgs e)
         {
-            for (int i=0; i < GameObjects.Count; i++)
+            for (int i = 0; i < GameObjects.Count; i++)
             {
                 if (GameObjects[i].IsActive)
                 {
@@ -145,20 +151,14 @@ namespace ClientEngine
             }
         }
         
-        //  The texture identifier.
-        uint[] textures = new uint[1];
+
         //  Storage the texture itself.
         private void GameFrame_OpenGLInitialized(object sender, EventArgs e)
         {
-
             foreach (var gameObject in GameObjects)
             {
                 gameObject.InitTexture(GameFrame.OpenGL);
             }
-
-
-           
-
         }
 
 
@@ -169,10 +169,13 @@ namespace ClientEngine
         /// <param name="args"></param>
         private void GameFrame_Renderer(object sender, RenderEventArgs args)
         {
-            //haalt de opengl renderer op en cleart het scherm
+           
+            //haalt de opengl renderer op en cleart het schermhoi
+
             var renderer = GameFrame.OpenGL;
             renderer.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-           
+
+            //renderer.frame
             //loopt door de game objecten heen en drawt deze
             for (int i = 0; i < GameObjects.Count; i++)
             {
@@ -193,12 +196,14 @@ namespace ClientEngine
             
                 renderer.LoadIdentity();
                 gameObject.Update();
-                //renderer.Begin(OpenGL.GL_QUADS);
+
                 Camera.Draw(renderer);
                 gameObject.Draw(renderer);
                 //renderer.End();
                 renderer.Flush();
+
             }
+
         }
 
         /// <summary>

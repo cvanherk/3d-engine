@@ -56,7 +56,7 @@ namespace ClientEngine.Test
 
         public override void OnGui()
         {
-            Gui.DrawLabel(new Vector2(0, 0), "Courier New", 12, "test");
+            Gui.DrawLabel(new Vector2(40, 40), "Courier New", 12, "test");
         }
 
         public void OnKeyDown(object sender, KeyEventArgs keyEventArgs)

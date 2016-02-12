@@ -22,7 +22,6 @@ namespace ClientEngine
                                                             Select(t => (GameObject)Activator.CreateInstance(t)).ToList().Where(x=>x.IsActive).ToList();
         public static IGameObject Camera = new Camera();
         private List<Guid> _objectIds = new List<Guid>();
-
         public Connection Connection;
         private bool IsRunning = false;
         public Game()

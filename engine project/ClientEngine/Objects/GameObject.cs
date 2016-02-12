@@ -20,7 +20,20 @@ namespace ClientEngine.Objects
         private float _xAcceleration = 0;
         private float _yAcceleration = 0;
         private float _zAcceleration = 0;
+        private float _maxAcceleration = 3f;
         protected string Texture;
+
+        public float MaxAcceleration
+        {
+            get
+            {
+                return _maxAcceleration;
+            }
+            set
+            {
+                _maxAcceleration = value;
+            }
+        }
 
         public Vector3 Position
         {

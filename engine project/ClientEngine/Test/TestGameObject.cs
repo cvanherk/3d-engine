@@ -23,8 +23,41 @@ namespace ClientEngine.Test
 
         private float OnXAccelerate()
         {
-            xAcceleration += 0.1f;
-            return xAcceleration;
+            if (xAcceleration <= MaxAcceleration)
+            {
+                xAcceleration += 0.1f;
+                return xAcceleration;
+            }
+            else
+            {
+                return xAcceleration;
+            }  
+        }
+
+        private float OnYAccelerate()
+        {
+            if (yAcceleration <= MaxAcceleration)
+            {
+                yAcceleration += 0.1f;
+                return yAcceleration;
+            }
+            else
+            {
+                return yAcceleration;
+            }
+        }
+
+        private float OnZAccelerate()
+        {
+            if (zAcceleration <= MaxAcceleration)
+            {
+                zAcceleration += 0.1f;
+                return zAcceleration;
+            }
+            else
+            {
+                return zAcceleration;
+            }
         }
 
         private void ClearXAcceleration()
@@ -32,10 +65,9 @@ namespace ClientEngine.Test
             xAcceleration = 0;
         }
 
-        private float OnZAccelerate()
+        private void ClearYAcceleration()
         {
-            zAcceleration += 0.1f;
-            return zAcceleration;
+            yAcceleration = 0;
         }
 
         private void ClearZAcceleration()
@@ -43,16 +75,6 @@ namespace ClientEngine.Test
             zAcceleration = 0;
         }
 
-        private float OnYAccelerate()
-        {
-            yAcceleration += 0.1f;
-            return yAcceleration;
-        }
-
-        private void ClearYAcceleration()
-        {
-            yAcceleration = 0;
-        }
 
         public void OnKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
